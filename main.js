@@ -47,9 +47,36 @@ class Blockchain {
         // push on chain 
         this.chain.push(newBlock); 
     }
+
+    // check if chain is valid 
+    isChainValid() {
+        for(let i = 1; i < this.chain.length; i++) {
+            const currentBlock = this.chain[i];
+            const previoucBlock = this.chain[i-1]; 
+
+            // if the hash of the current block is still valid by recalcualting
+            if(currentBlock.hash != currentBlock.calculateHash()) {
+                return false; 
+            }
+
+            // if previous hash is correct
+            if(currentBlock.previousHash != previoucBlock.hash) {
+                return false; 
+            }
+        }
+        return true; 
+    }
 }
+
+
 
 // test
 
 let coinChain = new Blockchain(); 
-coinChain.addBlock()
+coinChain.addBlock(new Block(1, "01/01/1992", {value: 4})); 
+coinChain.addBlock(new Block(2, "2/01/1992", {value: 24}));
+coinChain.addBlock(new Block(3, "11/01/1992", {value: 44})); 
+
+coinChain.chain[1].data = {value:100}; 
+console.log(coinChain.isChainValid());
+//console.log(JSON.stringify(coinChain, null, 4));
