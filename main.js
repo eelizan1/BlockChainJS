@@ -80,6 +80,8 @@ class Blockchain {
     
 }
 
+
+
 // test
 
 let coinChain = new Blockchain(); 
@@ -99,5 +101,3 @@ coinChain.addBlock(new Block(3, "11/10/2016", {amount: 22}));
 
 // console.log('Is chain valid? ' + coinChain.isChainValid());
 // console.log(JSON.stringify(coinChain, null, 4));
-
-console.log
